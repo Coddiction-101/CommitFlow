@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>CommitFlow - Tasks</title>
+</head>
+
+<body data-theme="light">
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <div class="logo">CommitFlow</div>
+        <ul class="links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="commit.html">Commits</a></li>
+            <li><a href="tasks.html" class="active" aria-current="page">Tasks</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <i class="ri-moon-fill"></i>
+        </button>
+    </nav>
+
+    <main class="container">
+        <h1>Daily Tasks</h1>
+        <p>Manage your daily tasks. Complete all tasks to maintain your streak!</p>
+
+        <div class="card">
+            <h2>Add New Task for Today</h2>
+            <div class="task-input-row">
+                <input type="text" id="task-input" placeholder="e.g., Complete LeetCode problem, Review notes" autocomplete="off" />
+                <button id="add-task">
+                    <i class="ri-add-line"></i> Add
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0;">Today's Tasks</h2>
+                <span id="task-counter" style="color: var(--primary); font-weight: 500;">0/0 completed</span>
+            </div>
+            <ul id="task-list" style="list-style: none; padding: 0;">
+                <li style="opacity: 0.6; text-align: center; padding: 20px;">No tasks added yet.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Task History</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">View tasks from previous days</p>
+            <div id="task-history"></div>
+        </div>
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/tasks.js"></script>
+    <script src="../js/streak.js"></script>
+    <script src="../js/heatmap.js"></script>
+    <script src="../js/theme.js"></script>
+</body>
+
+</html>

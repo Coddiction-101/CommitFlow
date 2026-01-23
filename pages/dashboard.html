@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>CommitFlow - Dashboard</title>
+</head>
+
+<body data-theme="light">
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <div class="logo">CommitFlow</div>
+        <ul class="links">
+            <li><a href="dashboard.html" class="active" aria-current="page">Dashboard</a></li>
+            <li><a href="commit.html">Commits</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <i class="ri-moon-fill"></i>
+        </button>
+    </nav>
+
+    <main class="container">
+        <h1 id="welcome-user">Welcome, Coder</h1>
+        <p>Track your daily progress and maintain your coding streak.</p>
+
+        <!-- Streak Display -->
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, var(--primary), #6366f1); color: white; padding: 30px;">
+            <h2 style="margin-bottom: 10px; color: white;">Current Streak</h2>
+            <div id="streak-count" style="font-size: 3rem; font-weight: 700;">0 days</div>
+            <p style="margin-top: 10px; opacity: 0.9;">Keep it going! 🔥</p>
+        </div>
+
+        <!-- Activity Heatmap -->
+        <div class="card">
+            <h2>Activity Heatmap (Last 14 Days)</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px;">Green cells indicate active days</p>
+            <div class="heatmap-grid" id="heatmap"></div>
+        </div>
+
+        <!-- Today's Status -->
+        <div class="card">
+            <h2>Today's Progress</h2>
+            <p id="today-status" style="font-size: 1.1rem; color: var(--primary); font-weight: 500;">No tasks completed yet.</p>
+        </div>
+
+        <!-- Task Preview -->
+        <div class="card">
+            <h2>Today's Tasks</h2>
+            <ul class="list" id="task-preview">
+                <li>No tasks added yet.</li>
+            </ul>
+            <a href="tasks.html" class="small-link">→ Manage Tasks</a>
+        </div>
+
+        <!-- Recent Commits -->
+        <div class="card">
+            <h2>Recent Commits</h2>
+            <ul class="list" id="commit-preview">
+                <li>No commits added yet.</li>
+            </ul>
+            <a href="commit.html" class="small-link">→ View All Commits</a>
+        </div>
+
+        <!-- Playlists Section -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h2 style="margin: 0;">Learning Playlists</h2>
+                <button id="add-playlist-btn" style="padding: 6px 12px; font-size: 0.9rem;">
+                    <i class="ri-add-line"></i> Add Playlist
+                </button>
+            </div>
+
+            <!-- Empty State -->
+            <div id="playlist-empty" style="display: none; text-align: center; padding: 20px; opacity: 0.7;">
+                <i class="ri-play-list-line" style="font-size: 3rem; opacity: 0.3;"></i>
+                <p>No playlists added yet.</p>
+                <button id="add-playlist-empty-btn" style="margin-top: 10px;">Add Your First Playlist</button>
+            </div>
+
+            <!-- Playlist List -->
+            <ul id="dashboard-playlists" style="list-style: none; padding: 0;"></ul>
+        </div>
+    </main>
+
+    <!-- Playlist Modal -->
+    <div id="playlist-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+        <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; position: relative;">
+            <button id="close-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); padding: 5px 10px;">×</button>
+            
+            <h2 style="margin-bottom: 20px;">Add Learning Playlist</h2>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Playlist URL</label>
+                <input type="url" id="playlist-url" placeholder="https://youtube.com/playlist?list=..." style="width: 100%;" />
+            </div>
+
+            <button id="save-playlist" style="width: 100%; margin-top: 10px;">Save Playlist</button>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/streak.js"></script>
+    <script src="../js/heatmap.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+
+</html>

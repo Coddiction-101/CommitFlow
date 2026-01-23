@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>CommitFlow - Commits</title>
+</head>
+
+<body data-theme="light">
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <div class="logo">CommitFlow</div>
+        <ul class="links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="commit.html" class="active" aria-current="page">Commits</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <i class="ri-moon-fill"></i>
+        </button>
+    </nav>
+
+    <main class="container">
+        <h1>Daily Commits</h1>
+        <p>Record what you learned and built each day. Only one commit per day allowed!</p>
+
+        <div class="card">
+            <h2>Today's Commit</h2>
+            <p id="commit-date" style="color: var(--primary); font-weight: 500; margin-bottom: 15px;"></p>
+            
+            <div class="commit-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">What did you learn today?</label>
+                    <input type="text" id="commit-title" placeholder="e.g., React Hooks, Python Classes, Git Workflows" autocomplete="off" />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">What did you build today?</label>
+                    <textarea id="commit-desc" placeholder="Describe what you built, experimented with, or worked on..." rows="4" autocomplete="off"></textarea>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Notes (Optional)</label>
+                    <textarea id="commit-notes" placeholder="Any additional thoughts, challenges, or wins..." rows="3" autocomplete="off"></textarea>
+                </div>
+
+                <button id="add-commit">
+                    <i class="ri-save-line"></i> Save Today's Commit
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Commit History</h2>
+            <ul id="commit-list" style="list-style: none; padding: 0;">
+                <li style="opacity: 0.6; text-align: center; padding: 20px;">No commits yet. Start your first one!</li>
+            </ul>
+        </div>
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/commit.js"></script>
+    <script src="../js/streak.js"></script>
+    <script src="../js/heatmap.js"></script>
+    <script src="../js/theme.js"></script>
+</body>
+
+</html>

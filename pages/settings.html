@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>CommitFlow - Settings</title>
+</head>
+
+<body data-theme="light">
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <div class="logo">CommitFlow</div>
+        <ul class="links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="commit.html">Commits</a></li>
+            <li><a href="tasks.html">Tasks</a></li>
+            <li><a href="settings.html" class="active" aria-current="page">Settings</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <i class="ri-moon-fill"></i>
+        </button>
+    </nav>
+
+    <main class="container">
+        <h1>Settings</h1>
+
+        <!-- Personalization -->
+        <div class="card">
+            <h2>Personalization</h2>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Your Name</label>
+                <input type="text" id="username-input" placeholder="Enter your name" style="margin-bottom: 10px;" />
+                <button id="save-username">Save Name</button>
+            </div>
+        </div>
+
+        <!-- Appearance -->
+        <div class="card">
+            <h2>Appearance</h2>
+            <p style="margin-bottom: 10px;">Use the moon/sun icon in the navbar to switch between light and dark mode.</p>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="font-weight: 500;">Current Theme:</span>
+                <span id="current-theme" style="color: var(--primary); font-weight: 600;">Light</span>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card">
+            <h2>Your Statistics</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div style="text-align: center; padding: 15px; background: var(--bg); border-radius: 8px;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);" id="stat-commits">0</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Total Commits</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: var(--bg); border-radius: 8px;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);" id="stat-tasks">0</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Total Tasks</div>
+                </div>
+                <div style="text-align: center; padding: 15px; background: var(--bg); border-radius: 8px;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary);" id="stat-streak">0</div>
+                    <div style="opacity: 0.8; font-size: 0.9rem;">Current Streak</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Data -->
+        <div class="card">
+            <h2>Export Your Data</h2>
+            <p style="margin-bottom: 10px;">Download all your commits and tasks as a JSON file for backup.</p>
+            <button id="export-data">
+                <i class="ri-download-line"></i> Export Data
+            </button>
+        </div>
+
+        <!-- Data Controls -->
+        <div class="card">
+            <h2>Data Controls</h2>
+            <p style="margin-bottom: 15px;">Reset all your progress, tasks, commits, playlists, and streak. This action cannot be undone!</p>
+            <button id="reset-all" class="danger-btn">
+                <i class="ri-delete-bin-line"></i> Reset All Data
+            </button>
+        </div>
+
+        <!-- About -->
+        <div class="card">
+            <h2>About CommitFlow</h2>
+            <p>A simple, offline-first coding tracker designed to keep you productive, consistent, and improving daily.</p>
+            <p style="margin-top: 10px;">Version: <strong>v1.0 — LocalStorage Edition</strong></p>
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9rem;">Built with vanilla JavaScript, HTML, and CSS.</p>
+        </div>
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/settings.js"></script>
+</body>
+
+</html>
