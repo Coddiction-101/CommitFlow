@@ -7,7 +7,7 @@ CommitFlow helps students and developers **commit their daily coding progress**,
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://Coddiction-101.github.io/CommitFlow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![CommitFlow Screenshot](https://via.placeholder.com/800x400/4f46e5/ffffff?text=CommitFlow+Dashboard)
+![CommitFlow Screenshot](https://pin.it/7ndWndQ5h)
 
 ---
 
