@@ -270,7 +270,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Your Name**
 - GitHub: [@Coddiction-101](https://github.com/Coddiction-101)
-- Twitter: [@gulshan kushwaha](https://linkedin.com/https://www.linkedin.com/in/gulshan-kushwaha-439036334/)
+- LinkedIn: [@gulshan kushwaha](https://www.linkedin.com/in/gulshan-kushwaha-439036334/)
 
 ---
 
