@@ -227,7 +227,7 @@ Contributions are welcome! Here's how you can help:
 - [ ] No data export/import yet
 - [ ] Task filtering by date needs improvement
 
-Found a bug? [Open an issue](https://github.com/yourusername/CommitFlow/issues)
+Found a bug? [Open an issue](https://github.com/Coddiction-101/CommitFlow/issues)
 
 ---
 
