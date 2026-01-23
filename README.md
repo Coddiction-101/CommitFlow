@@ -4,7 +4,7 @@
 
 CommitFlow helps students and developers **commit their daily coding progress**, reflect on what they learn, complete tasks, maintain streaks, and **visualize consistency over time** — all stored locally using **localStorage** for speed, privacy, and reliability.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://yourusername.github.io/CommitFlow)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://Coddiction-101.github.io/CommitFlow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![CommitFlow Screenshot](https://via.placeholder.com/800x400/4f46e5/ffffff?text=CommitFlow+Dashboard)
@@ -269,8 +269,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+- GitHub: [@Coddiction-101](https://github.com/Coddiction-101)
+- Twitter: [@gulshan kushwaha](https://linkedin.com/https://www.linkedin.com/in/gulshan-kushwaha-439036334/)
 
 ---
 
