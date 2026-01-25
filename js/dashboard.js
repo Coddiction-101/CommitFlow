@@ -1,11 +1,14 @@
-// dashboard.js — CommitFlow Dashboard
+// ===============================
+// dashboard.js — CommitFlow Dashboard (Refined)
+// ===============================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== USER NAME (optional) =====
+  // ===== USER NAME =====
   const usernameEl = document.getElementById("welcome-user");
-  const storedName = localStorage.getItem("username") || "Coder";
-
-  if (usernameEl) {
+  
+  function renderUsername() {
+    if (!usernameEl) return;
+    const storedName = localStorage.getItem("username") || "Coder";
     usernameEl.textContent = `Welcome, ${storedName}`;
   }
 
@@ -25,32 +28,46 @@ document.addEventListener("DOMContentLoaded", () => {
     if (todayTasks.length === 0) {
       taskPreview.innerHTML = "<li>No tasks added yet.</li>";
       if (todayStatus) {
-        todayStatus.textContent = "No tasks completed yet.";
+        todayStatus.textContent = "No tasks for today. Add some to get started!";
+        todayStatus.style.color = "var(--text-secondary)";
       }
       return;
     }
 
-    // Show today's tasks
-    todayTasks.forEach(task => {
+    // Show today's tasks (max 5)
+    const tasksToShow = todayTasks.slice(0, 5);
+    tasksToShow.forEach(task => {
       const li = document.createElement("li");
       li.textContent = task.text;
       if (task.completed) {
         li.style.textDecoration = "line-through";
         li.style.opacity = "0.6";
+        li.style.color = "var(--text-secondary)";
       }
       taskPreview.appendChild(li);
     });
 
+    // Add "show more" if there are more tasks
+    if (todayTasks.length > 5) {
+      const moreLi = document.createElement("li");
+      moreLi.innerHTML = `<em style="opacity: 0.7;">+${todayTasks.length - 5} more tasks...</em>`;
+      taskPreview.appendChild(moreLi);
+    }
+
     // Update today status
     const completedCount = todayTasks.filter(t => t.completed).length;
     const totalCount = todayTasks.length;
+    
     if (todayStatus) {
-      if (totalCount === 0) {
-        todayStatus.textContent = "No tasks completed yet.";
-      } else if (completedCount === totalCount) {
+      if (completedCount === totalCount) {
         todayStatus.textContent = "🎉 All tasks completed! Great job!";
-      } else {
+        todayStatus.style.color = "var(--success)";
+      } else if (completedCount > 0) {
         todayStatus.textContent = `${completedCount}/${totalCount} tasks completed today`;
+        todayStatus.style.color = "var(--primary)";
+      } else {
+        todayStatus.textContent = `${totalCount} task${totalCount !== 1 ? 's' : ''} pending`;
+        todayStatus.style.color = "var(--warning)";
       }
     }
   }
@@ -61,8 +78,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCommitPreview() {
     if (!commitPreview) return;
 
-    const commits = JSON.parse(localStorage.getItem("commits")) || [];
-    const latestCommits = commits.slice(-5); // Last 5 commits
+    const commits = JSON.parse(localStorage.getItem("commits")) || {};
+    const commitArray = Object.entries(commits)
+      .filter(([date, data]) => date && data && typeof data === 'object') // Filter out invalid entries
+      .map(([date, data]) => ({
+        date,
+        title: data.title || "Untitled",
+        description: data.description || "",
+        notes: data.notes || "",
+        timestamp: data.timestamp || ""
+      }));
+
+    // Sort by date (newest first)
+    commitArray.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const latestCommits = commitArray.slice(0, 5); // Last 5 commits
 
     commitPreview.innerHTML = "";
 
@@ -73,12 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     latestCommits.forEach(commit => {
       const li = document.createElement("li");
-      li.textContent = commit.title;
+      const date = new Date(commit.date + "T00:00:00");
+      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      li.innerHTML = `<strong>${commit.title}</strong> <span style="opacity: 0.6; font-size: 0.85rem;">(${dateStr})</span>`;
       commitPreview.appendChild(li);
     });
   }
 
-  // ===== PLAYLISTS (optional) =====
+  // ===== PLAYLISTS =====
   const playlistList = document.getElementById("dashboard-playlists");
   const emptyState = document.getElementById("playlist-empty");
   const addBtn = document.getElementById("add-playlist-btn");
@@ -103,11 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (emptyState) emptyState.style.display = "none";
 
-    playlists.forEach(url => {
+    playlists.forEach((playlist, index) => {
       const li = document.createElement("li");
       li.innerHTML = `
         <i class="ri-play-circle-fill"></i>
-        <a href="${url}" target="_blank">View Playlist</a>
+        <a href="${playlist}" target="_blank" rel="noopener noreferrer">View Playlist</a>
+        <button class="delete-btn" data-index="${index}" style="margin-left: auto; padding: 4px 8px; font-size: 0.85rem;">
+          <i class="ri-delete-bin-line"></i>
+        </button>
       `;
       playlistList.appendChild(li);
     });
@@ -125,11 +160,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (urlInput) urlInput.value = "";
   }
 
-  if (saveBtn) {
+  if (saveBtn && urlInput) {
     saveBtn.addEventListener("click", () => {
-      const url = urlInput?.value.trim();
+      const url = urlInput.value.trim();
       if (!url) {
         alert("Please paste a valid playlist URL");
+        return;
+      }
+
+      // Basic URL validation
+      try {
+        new URL(url);
+      } catch (e) {
+        alert("Please enter a valid URL (starting with http:// or https://)");
         return;
       }
 
@@ -140,31 +183,69 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Handle playlist deletion
+  if (playlistList) {
+    playlistList.addEventListener("click", (e) => {
+      const deleteBtn = e.target.closest(".delete-btn");
+      if (!deleteBtn) return;
+
+      const index = parseInt(deleteBtn.dataset.index);
+      if (isNaN(index)) return;
+
+      if (confirm("Delete this playlist?")) {
+        playlists.splice(index, 1);
+        localStorage.setItem("playlists", JSON.stringify(playlists));
+        renderPlaylists();
+      }
+    });
+  }
+
   if (addBtn) {
     addBtn.addEventListener("click", openModal);
   }
+  
   if (addBtnEmpty) {
     addBtnEmpty.addEventListener("click", openModal);
   }
+  
   if (closeModal) {
     closeModal.addEventListener("click", closeModalFn);
   }
 
-  window.addEventListener("click", e => {
-    if (modal && e.target === modal) {
+  // Close modal when clicking outside
+  if (modal) {
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModalFn();
+      }
+    });
+  }
+
+  // Close modal with Escape key
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.style.display === "flex") {
       closeModalFn();
     }
   });
 
   // ===== INITIAL RENDER =====
+  renderUsername();
   renderTaskPreview();
   renderCommitPreview();
   renderPlaylists();
 
-  // Optional: re-render when needed (e.g., after adding a task/commit)
+  // ===== MAKE FUNCTIONS GLOBALLY AVAILABLE =====
+  // So other modules can refresh the dashboard
   window.renderDashboard = {
     tasks: renderTaskPreview,
     commits: renderCommitPreview,
-    playlists: renderPlaylists
+    playlists: renderPlaylists,
+    username: renderUsername,
+    all: function() {
+      renderUsername();
+      renderTaskPreview();
+      renderCommitPreview();
+      renderPlaylists();
+    }
   };
 });
